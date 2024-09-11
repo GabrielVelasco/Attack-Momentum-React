@@ -68,7 +68,7 @@ const App = () => {
       </main>
 
       <footer>
-        <p>More details: <a href="https://github.com/GabrielVelasco/BET-Attack-Momentum" target="_blank" rel="noopener noreferrer">GitHub Repo</a></p>
+        <p>More details: <a href="https://GabrielVelasco.github.io/Attack-Momentum-React" target="_blank" rel="noopener noreferrer">GitHub Repo</a></p>
         <p>Any suggestions, email me at <a href="mailto:themrgabriel100@gmail.com">themrgabriel100@gmail.com</a></p>
       </footer>
     </div>
