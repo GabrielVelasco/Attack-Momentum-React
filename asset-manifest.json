@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Attack-Momentum-React/static/css/main.480eb0d2.css",
-    "main.js": "/Attack-Momentum-React/static/js/main.1bfab5a5.js",
+    "main.js": "/Attack-Momentum-React/static/js/main.4da34557.js",
     "static/js/453.a21eb27c.chunk.js": "/Attack-Momentum-React/static/js/453.a21eb27c.chunk.js",
     "index.html": "/Attack-Momentum-React/index.html",
     "main.480eb0d2.css.map": "/Attack-Momentum-React/static/css/main.480eb0d2.css.map",
-    "main.1bfab5a5.js.map": "/Attack-Momentum-React/static/js/main.1bfab5a5.js.map",
+    "main.4da34557.js.map": "/Attack-Momentum-React/static/js/main.4da34557.js.map",
     "453.a21eb27c.chunk.js.map": "/Attack-Momentum-React/static/js/453.a21eb27c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.480eb0d2.css",
-    "static/js/main.1bfab5a5.js"
+    "static/js/main.4da34557.js"
   ]
 }
