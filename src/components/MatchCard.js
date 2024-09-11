@@ -16,7 +16,6 @@ const MatchCard = ({ match, index }) => {
 
           return acc;
         }, {}));
-
       } catch (error) {
         console.error(`Error fetching stats for match ${match.id}:`, error);
       }
@@ -35,7 +34,6 @@ const MatchCard = ({ match, index }) => {
         const updatedMatch = response.data.event;
         
         setScore(`${updatedMatch.homeTeam.shortName} [${updatedMatch.homeScore.current}] - [${updatedMatch.awayScore.current}] ${updatedMatch.awayTeam.shortName}`);
-      
       } catch (error) {
         console.error(`Error updating score for match ${match.id}:`, error);
       }
