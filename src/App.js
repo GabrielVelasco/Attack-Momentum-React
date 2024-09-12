@@ -29,11 +29,9 @@ const App = () => {
     const destinationIndex = result.destination.index;
 
     if (sourceIndex !== destinationIndex) {
-      // Swap the cards instead of reordering
       const newMatches = Array.from(liveMatches);
-      const temp = newMatches[sourceIndex];
-      newMatches[sourceIndex] = newMatches[destinationIndex];
-      newMatches[destinationIndex] = temp;
+      const [reorderedItem] = newMatches.splice(sourceIndex, 1);
+      newMatches.splice(destinationIndex, 0, reorderedItem);
 
       setLiveMatches(newMatches);
     }
@@ -42,13 +40,13 @@ const App = () => {
   return (
     <div className="app">
       <header>
-        <h1>Attack Momentum, ReactJS version</h1>
+        <h1>Attack Momentum R</h1>
         <ul>
-          <li><b>This version is still on development (anybody wanting to help, welcome..).</b></li>
+          <li><b>This version is still in development (anybody wanting to help is welcome).</b></li>
           <li>SofaScore doesn't provide graphs for all matches.</li>
           <li><b>Scoreboards/Stats</b> are <b>updated automatically.</b></li>
           <li>Use zoom for better viewing (<b>CTRL</b> + <b>ScrollDown</b>/<b>ScrollUp</b>).</li>
-          <li><b>Drag a card and drop it over another to swap their positions.</b></li>
+          <li><b>Drag a card to reorder it within the list.</b></li>
         </ul>
       </header>
 
