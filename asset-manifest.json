@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Attack-Momentum-React/static/css/main.480eb0d2.css",
-    "main.js": "/Attack-Momentum-React/static/js/main.4da34557.js",
+    "main.css": "/Attack-Momentum-React/static/css/main.df6115a0.css",
+    "main.js": "/Attack-Momentum-React/static/js/main.cc210b0f.js",
     "static/js/453.a21eb27c.chunk.js": "/Attack-Momentum-React/static/js/453.a21eb27c.chunk.js",
     "index.html": "/Attack-Momentum-React/index.html",
-    "main.480eb0d2.css.map": "/Attack-Momentum-React/static/css/main.480eb0d2.css.map",
-    "main.4da34557.js.map": "/Attack-Momentum-React/static/js/main.4da34557.js.map",
+    "main.df6115a0.css.map": "/Attack-Momentum-React/static/css/main.df6115a0.css.map",
+    "main.cc210b0f.js.map": "/Attack-Momentum-React/static/js/main.cc210b0f.js.map",
     "453.a21eb27c.chunk.js.map": "/Attack-Momentum-React/static/js/453.a21eb27c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.480eb0d2.css",
-    "static/js/main.4da34557.js"
+    "static/css/main.df6115a0.css",
+    "static/js/main.cc210b0f.js"
   ]
 }
