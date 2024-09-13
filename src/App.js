@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MatchCard from './components/MatchCard';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const App = () => {
   const [liveMatches, setLiveMatches] = useState([]);
@@ -22,19 +23,12 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const onDragEnd = (result) => {
-    if (!result.destination) return;
+  const moveCard = (dragIndex, hoverIndex) => {
+    const dragCard = liveMatches[dragIndex];
+    liveMatches[dragIndex] = liveMatches[hoverIndex];
+    liveMatches[hoverIndex] = dragCard;
 
-    const sourceIndex = result.source.index;
-    const destinationIndex = result.destination.index;
-
-    if (sourceIndex !== destinationIndex) {
-      const newMatches = Array.from(liveMatches);
-      const [reorderedItem] = newMatches.splice(sourceIndex, 1);
-      newMatches.splice(destinationIndex, 0, reorderedItem);
-
-      setLiveMatches(newMatches);
-    }
+    setLiveMatches([...liveMatches]);
   };
 
   return (
@@ -51,18 +45,18 @@ const App = () => {
       </header>
 
       <main>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="matches">
-            {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef} className="match-list">
-                {liveMatches.map((match, index) => (
-                  <MatchCard key={match.id} match={match} index={index} />
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+        <DndProvider backend={HTML5Backend}>
+          <div className="match-list">
+            {liveMatches.map((match, index) => (
+              <MatchCard 
+                key={match.id} 
+                match={match} 
+                index={index}
+                moveCard={moveCard}
+              />
+            ))}
+          </div>
+        </DndProvider>
       </main>
 
       <footer>
