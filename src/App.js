@@ -6,12 +6,19 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const App = () => {
   const [liveMatches, setLiveMatches] = useState([]);
+  const [leagues, setLeagues] = useState([]);
+  const [selectedLeague, setSelectedLeague] = useState('All');
 
   useEffect(() => {
     const fetchLiveMatches = async () => {
       try {
         const response = await axios.get("https://www.sofascore.com/api/v1/sport/football/events/live");
-        setLiveMatches(response.data.events.filter(match => match.hasEventPlayerHeatMap || match.hasEventPlayerStatistics));
+        const filteredMatches = response.data.events.filter(match => match.hasEventPlayerHeatMap || match.hasEventPlayerStatistics);
+        setLiveMatches(filteredMatches);
+        
+        // Extract unique leagues from the matches
+        const uniqueLeagues = ['All', ...new Set(filteredMatches.map(match => match.tournament.name))];
+        setLeagues(uniqueLeagues);
       } catch (error) {
         console.error("Error fetching live matches:", error);
       }
@@ -31,6 +38,14 @@ const App = () => {
     setLiveMatches([...liveMatches]);
   };
 
+  const handleLeagueChange = (event) => {
+    setSelectedLeague(event.target.value);
+  };
+
+  const filteredMatches = selectedLeague === 'All'
+    ? liveMatches
+    : liveMatches.filter(match => match.tournament.name === selectedLeague);
+
   return (
     <div className="app">
       <header>
@@ -45,9 +60,18 @@ const App = () => {
       </header>
 
       <main>
+        <div className="league-selector">
+          <label htmlFor="league-select">Select League: </label>
+          <select id="league-select" value={selectedLeague} onChange={handleLeagueChange}>
+            {leagues.map((league, index) => (
+              <option key={index} value={league}>{league}</option>
+            ))}
+          </select>
+        </div>
+
         <DndProvider backend={HTML5Backend}>
           <div className="match-list">
-            {liveMatches.map((match, index) => (
+            {filteredMatches.map((match, index) => (
               <MatchCard 
                 key={match.id} 
                 match={match} 
