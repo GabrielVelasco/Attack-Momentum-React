@@ -8,7 +8,6 @@ body {
 
 .app {
   margin: 0 auto;
-  padding: 20px;
 }
 
 header {
@@ -76,7 +75,7 @@ ul li {
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 40%;
+  width: 60%;
   transition: transform 0.2s, box-shadow 0.2s;
   max-width: 505px;
 }

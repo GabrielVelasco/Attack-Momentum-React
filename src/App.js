@@ -16,9 +16,10 @@ const App = () => {
         const filteredMatches = response.data.events.filter(match => match.hasEventPlayerHeatMap || match.hasEventPlayerStatistics);
         setLiveMatches(filteredMatches);
         
-        // Extract unique leagues from the matches
-        const uniqueLeagues = ['All', ...new Set(filteredMatches.map(match => match.tournament.name))];
+        // extract unique leagues from the matches (for building the league selector)
+        const uniqueLeagues = ['All', ...new Set(filteredMatches.map(match => match.tournament.name))]; // omg
         setLeagues(uniqueLeagues);
+
       } catch (error) {
         console.error("Error fetching live matches:", error);
       }
@@ -31,6 +32,7 @@ const App = () => {
   }, []);
 
   const moveCard = (dragIndex, hoverIndex) => {
+    // Reorder the liveMatches array (to reflect the new order of the cards) though move cards aint working properly...
     const dragCard = liveMatches[dragIndex];
     liveMatches[dragIndex] = liveMatches[hoverIndex];
     liveMatches[hoverIndex] = dragCard;
@@ -51,7 +53,7 @@ const App = () => {
       <header>
         <h1>Attack Momentum R</h1>
         <ul>
-          <li><b>This version is still in development (anybody wanting to help is welcome).</b></li>
+          <li><b>This verison was made using React JS...</b></li>
           <li>SofaScore doesn't provide graphs for all matches.</li>
           <li><b>Scoreboards/Stats</b> are <b>updated automatically.</b></li>
           <li>Use zoom for better viewing (<b>CTRL</b> + <b>ScrollDown</b>/<b>ScrollUp</b>).</li>
@@ -85,7 +87,7 @@ const App = () => {
 
       <footer>
         <p>More details: <a href="https://github.com/GabrielVelasco/Attack-Momentum-React" target="_blank" rel="noopener noreferrer">GitHub Repo</a></p>
-        <p>Any suggestions, email me at <a href="mailto:themrgabriel100@gmail.com">themrgabriel100@gmail.com</a></p>
+        <p>Any suggestions/report, email me at <a href="mailto:themrgabriel100@gmail.com">themrgabriel100@gmail.com</a></p>
       </footer>
     </div>
   );

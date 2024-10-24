@@ -60,10 +60,12 @@ const MatchCard = ({ match, index, moveCard }) => {
     const fetchStats = async () => {
       try {
         const response = await axios.get(`https://www.sofascore.com/api/v1/event/${match.id}/statistics`);
+        
         setStats(response.data.statistics[0].groups[0].statisticsItems.reduce((acc, stat) => {
           acc[stat.key] = { home: stat.home, away: stat.away };
           return acc;
         }, {}));
+
       } catch (error) {
         console.error(`Error fetching stats for match ${match.id}:`, error);
       }
@@ -81,6 +83,7 @@ const MatchCard = ({ match, index, moveCard }) => {
         const response = await axios.get(`https://www.sofascore.com/api/v1/event/${match.id}`);
         const updatedMatch = response.data.event;
         setScore(`${updatedMatch.homeTeam.shortName} [${updatedMatch.homeScore.current}] - [${updatedMatch.awayScore.current}] ${updatedMatch.awayTeam.shortName}`);
+        
       } catch (error) {
         console.error(`Error updating score for match ${match.id}:`, error);
       }
