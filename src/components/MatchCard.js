@@ -7,7 +7,8 @@ const ItemTypes = {
 };
 
 const MatchCard = ({ match, index, moveCard }) => {
-  const [stats, setStats] = useState({});
+  const [selectedPeriod, setSelectedPeriod] = useState(0); // 0 == All, 1 == 1ST, 2 == 2ND
+  const [stats, setStats] = useState([]);
   const [score, setScore] = useState(`${match.homeTeam.shortName} [${match.homeScore.current}] - [${match.awayScore.current}] ${match.awayTeam.shortName}`);
 
   const ref = useRef(null);
@@ -61,11 +62,13 @@ const MatchCard = ({ match, index, moveCard }) => {
       try {
         const response = await axios.get(`https://www.sofascore.com/api/v1/event/${match.id}/statistics`);
         
-        setStats(response.data.statistics[0].groups[0].statisticsItems.reduce((acc, stat) => {
-          acc[stat.key] = { home: stat.home, away: stat.away };
-          return acc;
-        }, {}));
+        // const allStats = [];
+        // response.data.statistics[ selectedPeriod ].groups.forEach(groupStat => {
+        //   allStats.push(...groupStat.statisticsItems);
+        // });
 
+        setStats(response.data.statistics);
+        
       } catch (error) {
         console.error(`Error fetching stats for match ${match.id}:`, error);
       }
@@ -94,6 +97,10 @@ const MatchCard = ({ match, index, moveCard }) => {
     return () => clearInterval(interval);
   }, [match.id]);
 
+  useEffect(() => {
+    console.log('Current stats:', stats);
+  }, [stats]);
+
   return (
     <div ref={ref} style={{ opacity }} data-handler-id={handlerId} className="match-card">
       <div className="match-header">
@@ -106,26 +113,37 @@ const MatchCard = ({ match, index, moveCard }) => {
         className="attack-momentum-iframe"
       />
 
+      <div className="period-selector">
+        <button onClick={setSelectedPeriod(0)} className={"period-btn" + (selectedPeriod === 0 ? " selected" : "")}>All</button>
+        <button onClick={setSelectedPeriod(1)} className={"period-btn" + (selectedPeriod === 1 ? " selected" : "")}>1ST</button>
+        <button onClick={setSelectedPeriod(2)} className={"period-btn" + (selectedPeriod === 2 ? " selected" : "")}>2ND</button>
+      </div>
+
       <div className="stats-container">
         <div className="home-stats">
-          {Object.entries(stats).map(([key, value]) => (
-            <div key={key} className="stat-item">
-              <p>{key}</p>
-              <span>{value.home}</span>
-            </div>
-          ))}
+          {stats[parseInt(selectedPeriod)].groups.map(group => {
+            group.statisticsItems.map(stat => (
+              <div className="stat-item">
+                <span>{stat.home}</span>
+                <p>{stat.name}</p>
+              </div>
+            ))
+          })}
         </div>
 
         <div className="away-stats">
-          {Object.entries(stats).map(([key, value]) => (
-            <div key={key} className="stat-item">
-              <span>{value.away}</span>
-              <p>{key}</p>
-            </div>
-          ))}
+          {stats[parseInt(selectedPeriod)].groups.map(group => {
+              group.statisticsItems.map(stat => (
+                <div className="stat-item">
+                  <span>{stat.away}</span>
+                  <p>{stat.name}</p>
+                </div>
+              ))
+            })}
         </div>
       </div>
     </div>
+
   );
 };
 

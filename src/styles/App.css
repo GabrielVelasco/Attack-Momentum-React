@@ -63,6 +63,35 @@ ul li {
   margin-bottom: 10px;
 }
 
+.period-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  margin: 10px auto 10px auto;
+  width: 40%;
+}
+
+.period-btn {
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.period-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.period-btn.selected {
+  background-color: #3498db;
+  color: white;
+  border-color: #2980b9;
+}
+
 .match-list {
   display: flex;
   justify-content: center;
